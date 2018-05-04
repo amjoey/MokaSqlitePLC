@@ -234,16 +234,16 @@ public class MainActivity extends ListActivity {
 
                     byte[] dataWrite = new byte[96];
 
-                    int cAge = 0;
-                    int cName = 2;
+                    int cAmount = 0;
+                    int cTime = 2;
                     while (cursor.moveToNext()) {
 
-                        int intName =   Integer.parseInt(cursor.getString(cursor.getColumnIndex("name")));
-                        int intAge =    cursor.getInt(cursor.getColumnIndex("age"));
-                        S7.SetWordAt(dataWrite,cAge,intAge);
-                        S7.SetWordAt(dataWrite,cName,intName);
-                        cAge = cAge+4;
-                        cName = cName+4;
+                        int intTime =   cursor.getInt(cursor.getColumnIndex("time"));
+                        int intAmount =    cursor.getInt(cursor.getColumnIndex("amount"));
+                        S7.SetWordAt(dataWrite,cAmount,intAmount);
+                        S7.SetWordAt(dataWrite,cTime,intTime);
+                        cAmount = cAmount+4;
+                        cTime = cTime+4;
                     }
                     cursor.close();
                     client.WriteArea(S7.S7AreaDB, 1, 0, 96, dataWrite);
