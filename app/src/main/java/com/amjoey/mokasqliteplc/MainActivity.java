@@ -142,7 +142,7 @@ public class MainActivity extends ListActivity {
                 view.setBackgroundColor(Color.rgb(238, 233, 233));
             }
             else {
-                view.setBackgroundColor(Color.rgb(255, 255, 255));
+                view.setBackgroundColor(Color.rgb(255, 255, 204));
             }
             return view;
         }
@@ -273,7 +273,7 @@ public class MainActivity extends ListActivity {
                     cursor.close();
                     client.WriteArea(S7.S7AreaDB, 1, 0, 96, dataWrite);
 
-                    ret = "Updated";
+                    ret = "Upload Completed";
 
 
                 }else{
