@@ -223,13 +223,6 @@ public class MainActivity extends ListActivity {
                 if(res==0){//connection OK
 
                     cursor = mydb.getAllRecord();
-                    /*
-                    byte[] dataWrite = new byte[4];
-                    S7.SetWordAt(dataWrite,0,1000);
-                    S7.SetWordAt(dataWrite,0,2320);
-
-                    client.WriteArea(S7.S7AreaDB, 1, 0, 4, dataWrite);
-                    */
 
 
                     byte[] dataWrite = new byte[96];
