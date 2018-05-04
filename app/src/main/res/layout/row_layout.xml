@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:text="id"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/id"
+        android:layout_marginStart="32dp"
+        android:layout_toRightOf="@id/id"
+        android:text="name"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/id"
+        app:layout_constraintStart_toEndOf="@+id/id" />
+
+    <TextView
+        android:id="@+id/lblAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/time"
+        android:layout_below="@+id/time"
+        android:layout_marginStart="28dp"
+        android:text="amount :"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/time"
+        app:layout_constraintStart_toEndOf="@+id/time" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_alignBottom="@+id/lblAmount"
+        android:layout_marginStart="28dp"
+        android:layout_toRightOf="@id/lblAmount"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/lblAmount"
+        app:layout_constraintStart_toEndOf="@+id/lblAmount" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginEnd="8dp"
+        android:text="Sec"
+        app:layout_constraintBaseline_toBaselineOf="@+id/amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toEndOf="@+id/amount" />
+
+</android.support.constraint.ConstraintLayout>
