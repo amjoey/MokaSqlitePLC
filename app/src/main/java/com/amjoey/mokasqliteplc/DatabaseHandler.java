@@ -138,7 +138,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cur.getCount();
     }
 
-    public boolean updateTime(long recID, String time, int amount) {
+    public boolean updateTime(long recID, int time, int amount) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

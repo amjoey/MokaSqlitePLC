@@ -2,6 +2,7 @@ package com.amjoey.mokasqliteplc;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +24,30 @@ public class MainActivity extends ListActivity {
     private SimpleCursorAdapter adapter;
 
     DatabaseHandler mydb ;
+
+    private void updateData()
+    {
+        mydb = new DatabaseHandler(this);
+
+        cursor = mydb.getAllRecord();
+        adapter = new MyCursorAdapter(
+                this,
+                R.layout.row_layout,
+                cursor,
+                new String[] {"_id", "time", "amount"},
+                new int[] {R.id.id, R.id.time, R.id.amount},
+                0);
+        setListAdapter(adapter);
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
+        if (getListView() != null)
+        {
+            updateData();
+        }
+
         // we're going to simulate real time with thread that append data to the graph
         new Thread(new Runnable() {
 
@@ -71,6 +94,15 @@ public class MainActivity extends ListActivity {
         //register ListView for context menu in ListActivity class
         getListView().setAdapter(adapter);
         registerForContextMenu(getListView());
+    }
+
+    public void onListItemClick(ListView parent, View view, int position, long id) {
+
+        Intent intent = new Intent(this, EditFriend.class);
+        Cursor cursor = (Cursor) adapter.getItem(position);
+        intent.putExtra("recID", cursor.getInt(cursor.getColumnIndex("_id")));
+        startActivity(intent);
+
     }
 
     private class MyCursorAdapter extends SimpleCursorAdapter{
@@ -232,7 +264,7 @@ public class MainActivity extends ListActivity {
                     while (cursor.moveToNext()) {
 
                         int intTime =   cursor.getInt(cursor.getColumnIndex("time"));
-                        int intAmount =    cursor.getInt(cursor.getColumnIndex("amount"));
+                        int intAmount =    (cursor.getInt(cursor.getColumnIndex("amount"))*100);
                         S7.SetWordAt(dataWrite,cAmount,intAmount);
                         S7.SetWordAt(dataWrite,cTime,intTime);
                         cAmount = cAmount+4;
