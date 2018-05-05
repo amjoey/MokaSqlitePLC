@@ -1,6 +1,7 @@
 package com.amjoey.mokasqliteplc;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -150,10 +151,15 @@ public class MainActivity extends ListActivity {
     }
 
     public static String timeformat(int t){
-        String intTime;
-        intTime =String.valueOf(Integer.toHexString(t));
-        String first = padding(Integer.parseInt(intTime.substring(0, intTime.length() / 2)));
-        String second = padding(Integer.parseInt(intTime.substring(intTime.length() / 2)));
+        String intTime,first,second;
+        if(t>0) {
+            intTime = String.valueOf(Integer.toHexString(t));
+            first = padding(Integer.parseInt(intTime.substring(0, intTime.length() / 2)));
+            second = padding(Integer.parseInt(intTime.substring(intTime.length() / 2)));
+        }else{
+            first = "00";
+            second = "00";
+        }
         return first+ ":"  +second;
     }
 
@@ -242,8 +248,18 @@ public class MainActivity extends ListActivity {
     //begin class PlcWriter
     private class PlcWriter extends AsyncTask<String, Void, String> {
 
+        private ProgressDialog pd;
+
         String ret= "";
         DatabaseHandler mydb = new DatabaseHandler(getApplicationContext());
+
+        @Override
+        protected void onPreExecute(){
+            pd = new ProgressDialog(MainActivity.this);
+            pd.setMessage("Uploading...please wait");
+            pd.setCancelable(true);
+            pd.show();
+        }
 
         @Override
         protected String doInBackground(String... params){
@@ -289,6 +305,8 @@ public class MainActivity extends ListActivity {
 
         @Override
         protected void onPostExecute(String result){
+
+            pd.dismiss();
 
             Context context = getApplicationContext();
             Toast.makeText(context, ret, Toast.LENGTH_LONG).show();
