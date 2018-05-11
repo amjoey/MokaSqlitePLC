@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import Moka7.*;
 
@@ -187,6 +188,7 @@ public class MainActivity extends ListActivity {
     private class PlcReader extends AsyncTask<String, Void, String> {
 
         String ret = "";
+        int output1;
 
         @Override
         protected String doInBackground(String... params){
@@ -201,12 +203,17 @@ public class MainActivity extends ListActivity {
                     //res = client.ReadArea(S7.S7AreaDB,1,1,12,data);
 
                     byte[] data = new byte[4];
+                    byte[] data1 = new byte[2];
                     res = client.ReadArea(S7.S7AreaDB,1,988,3,data);
+                    res = client.ReadArea(S7.S7AreaDB,1,1064,1,data1);
                     //  ret = "value of DB1.DBD25: "+ S7.GetFloatAt(data,0);
                     //  ret = "value of DB1.DBD10: "+ S7.GetWordAt(data,0);
                     //ret = "Value of DB1.DBD1: "+ S7.GetWordAt(data,0)+"/"+ S7.GetWordAt(data,2)+"/"+ S7.GetWordAt(data,4)+"/"+ S7.GetWordAt(data,6)+"/"+ S7.GetWordAt(data,8)+"/"+ S7.GetWordAt(data,10);
 
                     ret = padding(S7.GetWordAt(data,0)/256) +":"+padding(S7.GetWordAt(data,1)/256) +":"+padding(S7.GetWordAt(data,2)/256) ;
+
+                    output1 = S7.GetWordAt(data1,0);
+
 
                     /*
                     byte[] dataWrite = new byte[2];
@@ -221,6 +228,7 @@ public class MainActivity extends ListActivity {
 
                 }else{
                     ret = "ERR: "+ S7Client.ErrorText(res);
+                    output1 = 0;
                 }
                 client.Disconnect();
             }catch (Exception e) {
@@ -232,8 +240,19 @@ public class MainActivity extends ListActivity {
 
         @Override
         protected void onPostExecute(String result){
+            ToggleButton tgOutput1 = (ToggleButton) findViewById(R.id.toggleButton2);
+            if(output1==256){
+                tgOutput1.setTextOn("ON");
+                tgOutput1.setChecked(true);
+            }else {
+                tgOutput1.setTextOff("OFF");
+                tgOutput1.setChecked(false);
+            }
+
             TextView txout = (TextView) findViewById(R.id.searchText);
             txout.setText(ret);
+
+
         }
     }
     //end class PlcReader

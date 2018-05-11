@@ -28,7 +28,7 @@ public class EditFriend extends Activity {
 
     private EditText etTime;
     private EditText etAmount;
-    private Button etButonOK;
+    private Button etButtonOK,etButtonCancel;
 
     ImageButton imgTimeON;
     private int chour,cminute;
@@ -56,7 +56,9 @@ public class EditFriend extends Activity {
         etAmount = (EditText) findViewById(R.id.amount);
         etAmount.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "59")});
 
-        etButonOK = (Button)findViewById(R.id.button_submit);
+        etButtonOK = (Button)findViewById(R.id.button_submit);
+
+        etButtonCancel = (Button)findViewById(R.id.button_cancel);
 
         imgTimeON = (ImageButton) findViewById(R.id.imgTimeON);
 
@@ -81,7 +83,7 @@ public class EditFriend extends Activity {
             Log.i(TAG, "recid " + cursor.getString(cursor.getColumnIndex("time")));
 
         }
-        etButonOK.setOnClickListener(new View.OnClickListener() {
+        etButtonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -92,6 +94,13 @@ public class EditFriend extends Activity {
                 }
                 else
                     Toast.makeText(EditFriend.this,"Data not Updated",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        etButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

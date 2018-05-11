@@ -8,13 +8,12 @@
 
     <EditText
         android:id="@+id/searchText"
-        android:layout_width="172dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="107dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
         android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton2"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton2" />
 
 
     <Button
@@ -36,5 +35,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp"
         tools:ignore="MissingConstraints" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="63dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="ToggleButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

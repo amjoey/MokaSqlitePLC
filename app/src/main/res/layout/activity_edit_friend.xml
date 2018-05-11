@@ -76,4 +76,13 @@
         app:layout_constraintStart_toEndOf="@+id/time"
         app:layout_constraintTop_toTopOf="@+id/time" />
 
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Cancel"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_submit"
+        app:layout_constraintStart_toEndOf="@+id/button_submit" />
+
 </android.support.constraint.ConstraintLayout>
